@@ -131,7 +131,7 @@ body {
 .timer-display {
   font-size: 4rem;
   font-weight: bold;
-  color: #5c6bc0;
+  color: #222;
   letter-spacing: 4px;
   margin: 12px 0 8px;
 }
