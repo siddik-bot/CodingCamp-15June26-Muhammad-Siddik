@@ -77,7 +77,7 @@ body {
    ------------------------------------------------------------ */
 
 .card {
-  background: #c8e6c9; /* light green matching background */
+  background: #ffffff; /* light green matching background */
   padding: 28px 32px;
   border-radius: 18px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
@@ -153,7 +153,7 @@ body {
 
 .timer-controls button {
   min-width: 80px;
-  background: #4caf7d;
+  background: #5c6bc0;
   color: #fff;
   border-radius: 10px;
   padding: 10px 18px;
@@ -161,7 +161,7 @@ body {
 }
 
 .timer-controls button:hover:not(:disabled) {
-  background: #388e5e;
+  background: #5c6bc0;
 }
 
 .timer-controls button:disabled {
