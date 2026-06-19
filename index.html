@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Life Dashboard</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+
+<h1 id="greeting">
+Hello
+</h1>
+
+<p id="date"></p>
+
+
+<div class="card">
+
+<h2>Focus Timer</h2>
+
+<h1 id="timer">
+25:00
+</h1>
+
+
+<button onclick="startTimer()">
+Start
+</button>
+
+<button onclick="stopTimer()">
+Stop
+</button>
+
+<button onclick="resetTimer()">
+Reset
+</button>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h2>To Do List</h2>
+
+
+<input 
+id="taskInput"
+placeholder="Add task">
+
+
+<button onclick="addTask()">
+Add
+</button>
+
+
+<ul id="taskList">
+
+</ul>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>Quick Links</h2>
+
+
+<a href="https://google.com" target="_blank">
+Google
+</a>
+
+
+<a href="https://github.com" target="_blank">
+Github
+</a>
+
+
+</div>
+
+
+
+<button onclick="darkMode()">
+Dark Mode
+</button>
+
+
+</div>
+
+
+
+<script src="js/script.js"></script>
+
+
+</body>
+</html>
