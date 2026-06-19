@@ -14,7 +14,8 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  /* Light green background */
+  background: #d4edda;
   color: #222;
   min-height: 100vh;
   transition: background 0.3s, color 0.3s;
@@ -22,50 +23,55 @@ body {
 
 /* ------------------------------------------------------------
    LAYOUT — RESPONSIVE GRID (Req 12)
+   Desktop: greeting full-width, then 2-col, then links below
    ------------------------------------------------------------ */
 
 .container {
-  width: 90%;
-  max-width: 1400px;
+  width: 92%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 0;
   display: grid;
   gap: 20px;
-  /* Mobile-first: single column (Req 12.2) */
+  /* Mobile: single column */
   grid-template-columns: 1fr;
+  grid-template-areas:
+    "greeting"
+    "timer"
+    "tasks"
+    "links"
+    "darkmode";
 }
 
-/* Two-column at 768px–1279px (Req 12.3) */
+/* Two-column at 768px–1279px */
 @media (min-width: 768px) and (max-width: 1279px) {
   .container {
     grid-template-columns: 1fr 1fr;
-  }
-
-  /* Greeting spans full width */
-  .card--greeting {
-    grid-column: 1 / -1;
-  }
-
-  /* Dark mode button spans full width */
-  .darkmode-row {
-    grid-column: 1 / -1;
+    grid-template-areas:
+      "greeting greeting"
+      "timer    tasks"
+      "links    links"
+      "darkmode darkmode";
   }
 }
 
-/* Three+ columns at 1280px and above (Req 12.4) */
+/* Three columns at 1280px+ */
 @media (min-width: 1280px) {
   .container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .card--greeting {
-    grid-column: 1 / -1;
-  }
-
-  .darkmode-row {
-    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "greeting greeting greeting"
+      "timer    tasks    tasks"
+      "links    links    links"
+      "darkmode darkmode darkmode";
   }
 }
+
+.card--greeting { grid-area: greeting; }
+.card--timer    { grid-area: timer; }
+.card--tasks    { grid-area: tasks; }
+.card--links    { grid-area: links; }
+.darkmode-row   { grid-area: darkmode; }
 
 /* ------------------------------------------------------------
    CARD
@@ -73,141 +79,140 @@ body {
 
 .card {
   background: #fff;
-  padding: 24px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 4px;
-}
-
-h2 {
-  font-size: 1.2rem;
-  margin-bottom: 16px;
-  color: #444;
+  padding: 28px 32px;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* ------------------------------------------------------------
-   GREETING WIDGET (Req 1, 2, 3)
+   GREETING WIDGET
    ------------------------------------------------------------ */
 
+.card--greeting {
+  text-align: center;
+  padding: 32px;
+}
+
 #clock {
-  font-size: 2.2rem;
+  font-size: 3.2rem;
   font-weight: bold;
-  letter-spacing: 2px;
-  margin: 8px 0 4px;
+  color: #5c6bc0;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
 }
 
 #date {
   font-size: 1rem;
-  color: #666;
-  margin-bottom: 16px;
+  color: #555;
+  margin-bottom: 10px;
 }
 
-.username-form {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-
-.username-form input {
-  flex: 1;
-  min-width: 160px;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
+#greeting {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #222;
 }
 
 /* ------------------------------------------------------------
-   TIMER (Req 4)
+   FOCUS TIMER
    ------------------------------------------------------------ */
 
-.timer-display {
-  font-size: 3.5rem;
-  font-weight: bold;
+.card--timer {
   text-align: center;
+}
+
+.card--timer h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #5c6bc0;
   letter-spacing: 4px;
-  margin: 12px 0;
+  margin: 12px 0 8px;
 }
 
 .timer-notification {
-  text-align: center;
   color: #e63946;
   font-weight: bold;
   min-height: 1.4em;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
 }
 
 .timer-controls {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-/* ------------------------------------------------------------
-   BUTTONS
-   ------------------------------------------------------------ */
-
-button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  background: #4a90e2;
+.timer-controls button {
+  min-width: 80px;
+  background: #5c6bc0;
   color: #fff;
-  transition: background 0.2s, opacity 0.2s;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
 }
 
-button:hover:not(:disabled) {
-  background: #357abd;
+.timer-controls button:hover:not(:disabled) {
+  background: #3f51b5;
 }
 
-button:disabled {
-  opacity: 0.4;
+.timer-controls button:disabled {
+  background: #bdbdbd;
   cursor: not-allowed;
-}
-
-button.btn-edit {
-  background: #f0a500;
-}
-
-button.btn-edit:hover:not(:disabled) {
-  background: #c98400;
-}
-
-button.btn-delete {
-  background: #e63946;
-}
-
-button.btn-delete:hover:not(:disabled) {
-  background: #c0282f;
+  opacity: 1;
 }
 
 /* ------------------------------------------------------------
-   TASK INPUT
+   TASKS
    ------------------------------------------------------------ */
+
+.card--tasks h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 14px;
+}
 
 .task-input-row {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .task-input-row input {
   flex: 1;
-  min-width: 160px;
+  padding: 10px 14px;
+  border: 1.5px solid #c5cae9;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-/* ------------------------------------------------------------
-   TASK LIST (Req 5–9)
-   ------------------------------------------------------------ */
+.task-input-row input:focus {
+  border-color: #5c6bc0;
+}
+
+.task-input-row button {
+  background: #5c6bc0;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.task-input-row button:hover {
+  background: #3f51b5;
+}
 
 #taskList {
   list-style: none;
@@ -217,109 +222,188 @@ button.btn-delete:hover:not(:disabled) {
 .task-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 4px;
-  border-bottom: 1px solid #eee;
-  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .task-item:last-child {
   border-bottom: none;
 }
 
+.task-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #5c6bc0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .task-title {
   flex: 1;
+  font-size: 0.95rem;
   word-break: break-word;
+  color: #333;
 }
 
 /* Req 7.2 — strikethrough for completed tasks */
 .task-done {
   text-decoration: line-through;
-  color: #999;
+  color: #aaa;
+}
+
+.btn-edit {
+  background: #f0a500;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-edit:hover {
+  background: #c98400;
+}
+
+.btn-delete {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-delete:hover {
+  background: #c0282f;
 }
 
 .edit-input {
   flex: 1;
-  min-width: 120px;
   padding: 6px 10px;
-  border: 1px solid #4a90e2;
-  border-radius: 6px;
+  border: 1.5px solid #5c6bc0;
+  border-radius: 8px;
   font-size: 0.95rem;
+  outline: none;
 }
 
 /* ------------------------------------------------------------
-   QUICK LINKS (Req 10)
+   QUICK LINKS
    ------------------------------------------------------------ */
+
+.card--links h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 14px;
+}
 
 .link-input-group {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .link-input-group input {
   flex: 1;
   min-width: 120px;
-}
-
-#linkList {
-  list-style: none;
-  margin-top: 8px;
-}
-
-.link-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 4px;
-  border-bottom: 1px solid #eee;
-}
-
-.link-item:last-child {
-  border-bottom: none;
-}
-
-.link-item a {
-  flex: 1;
-  color: #4a90e2;
-  text-decoration: none;
-  word-break: break-all;
-}
-
-.link-item a:hover {
-  text-decoration: underline;
-}
-
-/* ------------------------------------------------------------
-   SHARED INPUTS
-   ------------------------------------------------------------ */
-
-input[type="text"],
-input[type="url"] {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1.5px solid #c5cae9;
+  border-radius: 10px;
   font-size: 0.95rem;
-  width: 100%;
+  outline: none;
   transition: border-color 0.2s;
 }
 
-input[type="text"]:focus,
-input[type="url"]:focus {
-  outline: none;
-  border-color: #4a90e2;
+.link-input-group input:focus {
+  border-color: #5c6bc0;
+}
+
+.link-input-group button {
+  background: #5c6bc0;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.link-input-group button:hover {
+  background: #3f51b5;
+}
+
+/* Link pills — like the buttons with × in the screenshot */
+.link-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5c6bc0;
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.link-pill a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.link-pill:hover {
+  background: #3f51b5;
+}
+
+.link-pill-delete {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.link-pill-delete:hover {
+  background: rgba(255,255,255,0.45);
 }
 
 /* ------------------------------------------------------------
-   VALIDATION MESSAGES
+   SHARED
    ------------------------------------------------------------ */
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
 .error-msg {
   color: #e63946;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   min-height: 1.2em;
-  margin: 4px 0 8px;
+  margin: 2px 0 6px;
 }
 
 /* ------------------------------------------------------------
@@ -329,17 +413,19 @@ input[type="url"]:focus {
 .darkmode-row {
   display: flex;
   justify-content: center;
-  padding: 8px 0;
+  padding: 4px 0 16px;
 }
 
 #darkModeBtn {
-  background: #555;
-  padding: 10px 24px;
-  font-size: 1rem;
+  background: #5c6bc0;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 28px;
+  font-size: 0.95rem;
 }
 
 #darkModeBtn:hover {
-  background: #333;
+  background: #3f51b5;
 }
 
 /* ------------------------------------------------------------
@@ -353,41 +439,54 @@ body.dark {
 
 body.dark .card {
   background: #16213e;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-body.dark h2 {
-  color: #aaa;
+body.dark #clock {
+  color: #7986cb;
 }
 
 body.dark #date {
   color: #aaa;
 }
 
-body.dark input[type="text"],
-body.dark input[type="url"],
-body.dark .edit-input {
-  background: #0f3460;
+body.dark #greeting {
   color: #e0e0e0;
-  border-color: #4a90e2;
 }
 
-body.dark input[type="text"]::placeholder,
-body.dark input[type="url"]::placeholder {
-  color: #aaa;
+body.dark .card--timer h2,
+body.dark .card--tasks h2,
+body.dark .card--links h2 {
+  color: #ccc;
 }
 
-body.dark .task-item,
-body.dark .link-item {
-  border-bottom-color: #333;
+body.dark .timer-display {
+  color: #7986cb;
+}
+
+body.dark .task-title {
+  color: #ddd;
+}
+
+body.dark .task-item {
+  border-bottom-color: #2a2a4a;
 }
 
 body.dark .task-done {
   color: #666;
 }
 
-body.dark .link-item a {
-  color: #74b5f5;
+body.dark .task-input-row input,
+body.dark .link-input-group input,
+body.dark .edit-input {
+  background: #0f3460;
+  color: #e0e0e0;
+  border-color: #5c6bc0;
+}
+
+body.dark .task-input-row input::placeholder,
+body.dark .link-input-group input::placeholder {
+  color: #999;
 }
 
 body.dark #darkModeBtn {

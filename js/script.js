@@ -458,19 +458,19 @@ function saveLinks() {
 }
 
 function renderLinks() {
-  const list = document.getElementById("linkList");
-  list.innerHTML = "";
+  const container = document.getElementById("linkList");
+  container.innerHTML = "";
 
   links.forEach((link, index) => {
-    const li = document.createElement("li");
-    li.className = "link-item";
-    li.innerHTML = `
+    const pill = document.createElement("span");
+    pill.className = "link-pill";
+    pill.innerHTML = `
       <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">
         ${escapeHtml(link.label)}
       </a>
-      <button onclick="deleteLink(${index})" aria-label="Delete link">Delete</button>
+      <button class="link-pill-delete" onclick="deleteLink(${index})" aria-label="Delete link">×</button>
     `;
-    list.appendChild(li);
+    container.appendChild(pill);
   });
 }
 
