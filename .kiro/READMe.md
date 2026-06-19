@@ -1,11 +1,28 @@
 # Life Dashboard Project
 
-Created with Kiro assistance.
+Created using Kiro assistance.
 
-Technology:
+## Technology
+
 - HTML
 - CSS
-- JavaScript
+- Vanilla JavaScript
 
-Storage:
-- Local Storage
+## Storage
+
+Local Storage API
+
+## Features
+
+- Greeting system
+- Date and time
+- Pomodoro timer
+- Todo list CRUD
+- Quick links
+- Dark mode
+- Custom username
+- Duplicate task prevention
+
+## Deployment
+
+GitHub Pages
