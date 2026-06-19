@@ -108,44 +108,11 @@ setInterval(updateClock, 1000);
 
 
 /* ------------------------------------------------------------
-   REQ 3 — CUSTOM USERNAME
+   REQ 3 — CUSTOM USERNAME (input removed from greeting card,
+   username is loaded from storage on startup only)
    ------------------------------------------------------------ */
 
-// Pre-fill input with saved username
-(function loadUsernameInput() {
-  const saved = safeGetStorage("username") || "";
-  const input = document.getElementById("usernameInput");
-  if (input) input.value = saved;
-})();
-
-// Submit on Enter key (Req 3.2)
-document.getElementById("usernameInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") saveUsername();
-});
-
-function saveUsername() {
-  const input = document.getElementById("usernameInput");
-  const raw = input.value;
-  const trimmed = raw.trim(); // Req 3.2
-
-  // Req 3.6 — max 50 chars
-  if (trimmed.length > 50) {
-    showError("usernameError", "Username must be 50 characters or fewer.");
-    return;
-  }
-
-  clearError("usernameError");
-
-  if (trimmed === "") {
-    // Req 3.5 — show greeting without name, do NOT update storage
-    updateGreeting();
-    return;
-  }
-
-  // Req 3.3 — persist and update greeting
-  safeSetStorage("username", trimmed);
-  updateGreeting();
-}
+// No username input in current UI — greeting uses stored value only
 
 
 /* ------------------------------------------------------------
