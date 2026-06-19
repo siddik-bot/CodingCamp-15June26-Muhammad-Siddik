@@ -95,14 +95,14 @@ body {
 #clock {
   font-size: 3.2rem;
   font-weight: bold;
-  color: #5c6bc0;
+  color: #222;
   letter-spacing: 3px;
   margin-bottom: 8px;
 }
 
 #date {
   font-size: 1rem;
-  color: #555;
+  color: #222;
   margin-bottom: 10px;
 }
 
@@ -124,7 +124,7 @@ body {
 .card--timer h2 {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #333;
+  color: #222;
   margin-bottom: 12px;
 }
 
