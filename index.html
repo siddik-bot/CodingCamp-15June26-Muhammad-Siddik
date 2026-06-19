@@ -1,107 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Life Dashboard</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    /* Apply dark mode before paint to prevent flash (Req 11.4, 13.1) */
+    (function () {
+      try {
+        if (localStorage.getItem("darkMode") === "true") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
-
 <body>
 
+  <div class="container">
 
-<div class="container">
+    <!-- GREETING WIDGET (Req 1, 2, 3) -->
+    <div class="card card--greeting">
+      <h1 id="greeting">Hello</h1>
+      <p id="clock">--:--:--</p>
+      <p id="date">Date unavailable</p>
+      <div class="username-form">
+        <input
+          id="usernameInput"
+          type="text"
+          placeholder="Enter your name"
+          maxlength="50"
+          aria-label="Username">
+        <button id="usernameSaveBtn" onclick="saveUsername()">Save Name</button>
+      </div>
+      <p id="usernameError" class="error-msg" aria-live="polite"></p>
+    </div>
 
+    <!-- FOCUS TIMER (Req 4) -->
+    <div class="card">
+      <h2>Focus Timer</h2>
+      <div id="timerDisplay" class="timer-display">25:00</div>
+      <p id="timerNotification" class="timer-notification" aria-live="polite"></p>
+      <div class="timer-controls">
+        <button id="startBtn" onclick="startTimer()">Start</button>
+        <button id="stopBtn" onclick="stopTimer()" disabled>Stop</button>
+        <button id="resetBtn" onclick="resetTimer()" disabled>Reset</button>
+      </div>
+    </div>
 
-<h1 id="greeting">
-Hello
-</h1>
+    <!-- TO DO LIST (Req 5, 6, 7, 8, 9) -->
+    <div class="card">
+      <h2>To Do List</h2>
+      <div class="task-input-row">
+        <input
+          id="taskInput"
+          type="text"
+          placeholder="Add a task (max 200 chars)"
+          maxlength="200"
+          aria-label="New task title">
+        <button onclick="addTask()">Add</button>
+      </div>
+      <p id="taskError" class="error-msg" aria-live="polite"></p>
+      <ul id="taskList"></ul>
+    </div>
 
-<p id="date"></p>
+    <!-- QUICK LINKS (Req 10) -->
+    <div class="card">
+      <h2>Quick Links</h2>
+      <div class="link-input-group">
+        <input
+          id="linkLabel"
+          type="text"
+          placeholder="Label (max 50 chars)"
+          maxlength="50"
+          aria-label="Link label">
+        <input
+          id="linkUrl"
+          type="text"
+          placeholder="URL (https://...)"
+          maxlength="2048"
+          aria-label="Link URL">
+        <button onclick="addLink()">Add Link</button>
+      </div>
+      <p id="linkError" class="error-msg" aria-live="polite"></p>
+      <ul id="linkList"></ul>
+    </div>
 
+    <!-- DARK MODE TOGGLE (Req 11) -->
+    <div class="darkmode-row">
+      <button id="darkModeBtn" onclick="toggleDarkMode()">Switch to Dark Mode</button>
+    </div>
 
-<div class="card">
+  </div>
 
-<h2>Focus Timer</h2>
-
-<h1 id="timer">
-25:00
-</h1>
-
-
-<button onclick="startTimer()">
-Start
-</button>
-
-<button onclick="stopTimer()">
-Stop
-</button>
-
-<button onclick="resetTimer()">
-Reset
-</button>
-
-
-</div>
-
-
-
-<div class="card">
-
-<h2>To Do List</h2>
-
-
-<input 
-id="taskInput"
-placeholder="Add task">
-
-
-<button onclick="addTask()">
-Add
-</button>
-
-
-<ul id="taskList">
-
-</ul>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>Quick Links</h2>
-
-
-<a href="https://google.com" target="_blank">
-Google
-</a>
-
-
-<a href="https://github.com" target="_blank">
-Github
-</a>
-
-
-</div>
-
-
-
-<button onclick="darkMode()">
-Dark Mode
-</button>
-
-
-</div>
-
-
-
-<script src="js/script.js"></script>
-
-
+  <script src="js/script.js"></script>
 </body>
 </html>
